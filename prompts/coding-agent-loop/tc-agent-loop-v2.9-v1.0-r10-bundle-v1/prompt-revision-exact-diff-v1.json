@@ -1,0 +1,22 @@
+{
+  "schema_version": "1",
+  "diff_format": "SHA256_BOUND_WHOLE_FILE_REPLACEMENT",
+  "operation": "REPLACE",
+  "predecessor": {
+    "path": "../tc-agent-loop-v2.8-v0.9-r9-bundle-v1/core-prompt-v2.8.md",
+    "sha256": "f29a59765f7809a769d39de33f64d14ea4e5f45b19cf40239c6b53826870d5c7"
+  },
+  "successor": {
+    "path": "core-prompt-v2.9.md",
+    "sha256": "865da58c80dc9afd904ab476c0407bad4258b6edc7505f78c9473d7c5174481e"
+  },
+  "exact_semantics": "Replace the complete predecessor byte sequence identified by predecessor.sha256 with the complete successor byte sequence stored at successor.path and identified by successor.sha256. No unstated edit is part of this revision.",
+  "intentional_changes": [
+    "Replace mandatory Reviewer-Challenger-Adjudicator review with Fresh Reviewer direct routing.",
+    "Add ESCALATE as the only path to Fresh Challenger and Adjudicator.",
+    "Permit Challenger to receive the sealed escalation boundary while requiring fresh independent inspection.",
+    "Make Challenger availability irrelevant to non-escalated outcomes.",
+    "Align Developer execution language with durable resumable recovery infrastructure.",
+    "Preserve Developer-only product writes, automated verification, P2 ledger, recovery evidence, and Human-only GO."
+  ]
+}

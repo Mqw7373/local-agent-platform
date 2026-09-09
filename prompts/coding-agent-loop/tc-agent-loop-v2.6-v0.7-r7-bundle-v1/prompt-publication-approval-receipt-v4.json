@@ -1,0 +1,30 @@
+{
+  "schema_version": "tc-prompt-publication-approval-receipt.v4",
+  "receipt_id": "TC-PROMPT-PUBLICATION-APPROVAL-v4",
+  "approved_at_utc": "2026-08-20T05:14:59.1141895Z",
+  "approved_by": "USER",
+  "approval_turn_id": "01a01d97-9cdb-7f20-bb3b-f162004fc804",
+  "approval_text": "人工批准发布",
+  "approved_revision_set": "TC-LATENCY-BOUNDED-AGENT-LOOP-V2.6-V0.7-CANDIDATE.2",
+  "approved_bytes": {
+    "core_prompt_sha256": "39d4b97ff1732c1fb21da6f3a77dbe43138b2402edb827fec3f04734676e404d",
+    "adapter_sha256": "f41ffec019c3ea5eb32655c22605075cee81239b2a24fff991034504d6077893",
+    "candidate_manifest_sha256": "0e904d0ea3a87b7fec4ef018f0fa0e02708066058fb17b2f2e1f0363d44cb773"
+  },
+  "publication_manifest": {
+    "file": "prompt-publication-manifest-v3.json",
+    "sha256": "4cd5ab9b6929cd283298dcfc5a3addabaf9846d3b19ae2e6a11c9cbc1e1cdf27"
+  },
+  "published_bundle": {
+    "file": "r7-latency-bounded-bundle-v1-published.json",
+    "sha256": "7ebd016a6fce0e841e2bf907bfe7451bf557fa46b8c0e32b384d04fcf4c880dc",
+    "status": "FROZEN_FOR_IMPLEMENTATION"
+  },
+  "publication_effect": {
+    "prompt_status": "APPROVED_FOR_PUBLICATION",
+    "r6_mutated": false,
+    "candidate_history_preserved": true,
+    "r7_launch_authorized": false,
+    "r7_launch_status": "NOT_LAUNCHED"
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "schema_version": "tc-prompt-revision-candidate-manifest.v2",
+  "revision_set_id": "TC-LATENCY-BOUNDED-AGENT-LOOP-V2.6-V0.7-CANDIDATE.3",
+  "prompt_finding_ids": [
+    "PF-R7-003-REVIEWER-PROPOSAL-ONLY",
+    "PF-R7-004-MANDATORY-ADJUDICATION-DISPATCH-GATE",
+    "PF-R7-005-BASELINE-FAILURE-SEPARATION"
+  ],
+  "publication_status": "CANDIDATE_AWAITING_HUMAN_APPROVAL",
+  "active_round_effect": "NO_EFFECT_ON_ACTIVE_ROUND",
+  "candidate_predecessor": {
+    "manifest": "prompt-revision-v2.6-v0.7-candidate.2-manifest.json",
+    "manifest_sha256": "0e904d0ea3a87b7fec4ef018f0fa0e02708066058fb17b2f2e1f0363d44cb773",
+    "core_prompt": "core-prompt-v2.6-candidate.2.md",
+    "core_prompt_sha256": "39d4b97ff1732c1fb21da6f3a77dbe43138b2402edb827fec3f04734676e404d"
+  },
+  "files": [
+    {
+      "role": "CORE_PROMPT",
+      "path": "core-prompt-v2.6-candidate.3.md",
+      "sha256": "ecba724a62bfa894763b2a48f1d195517f99e3fefb8de8be0748c73df7bd1990",
+      "predecessor_sha256": "39d4b97ff1732c1fb21da6f3a77dbe43138b2402edb827fec3f04734676e404d"
+    },
+    {
+      "role": "UNCHANGED_INTEGRATED_ADAPTER",
+      "path": "experiment-adapter-v0.7-candidate.2.md",
+      "sha256": "f41ffec019c3ea5eb32655c22605075cee81239b2a24fff991034504d6077893"
+    },
+    {
+      "role": "UNCHANGED_PUBLISHED_R7_BUNDLE",
+      "path": "r7-latency-bounded-bundle-v1-published.json",
+      "sha256": "7ebd016a6fce0e841e2bf907bfe7451bf557fa46b8c0e32b384d04fcf4c880dc"
+    },
+    {
+      "role": "STRUCTURAL_DIFF",
+      "path": "prompt-revision-v2.6-v0.7-candidate.3-structural-diff.md",
+      "sha256": "6de55b2b2c6d4435b7cfc32f779184e00b54dc328662754fcc29576239b2f0e9"
+    },
+    {
+      "role": "UNCHANGED_FINDING_LEDGER",
+      "path": "prompt-finding-escape-ledger-v14.json",
+      "sha256": "ed79ea0db2377d5c4ee76f0b31aeede74fd899396641651e7922c9f1751ce18e"
+    }
+  ],
+  "review_authority": {
+    "reviewer_findings_are_proposals_only": true,
+    "reviewer_may_issue_final_disposition": false,
+    "adjudicator_exclusively_accepts_rejects_and_routes": true,
+    "new_closure_findings_require_adjudication": true
+  },
+  "dispatch_gate": {
+    "sealed_adjudication_decision_required": true,
+    "accepted_code_finding_id_membership_required": true,
+    "reviewer_report_direct_to_developer_forbidden": true,
+    "violation": "BLOCKED_UNADJUDICATED_FINDING_DISPATCH"
+  },
+  "baseline_failure_separation": {
+    "same_command_baseline_reproduction_required": true,
+    "pre_existing_untouched_out_of_scope_failure_is_candidate_p0_p1": false,
+    "blocked_status": "BLOCKED_BASELINE_PRECONDITION"
+  },
+  "write_authority": {
+    "sole_product_writer_role": "Developer",
+    "all_other_develop_loop_roles_product_read_only": true,
+    "indirect_non_developer_product_writes_forbidden": true,
+    "unauthorized_write_result": "UNAUTHORIZED_PRODUCT_WRITE_VIOLATION"
+  },
+  "workflow_limits": {
+    "full_discovery_review_pairs_per_bundle_cycle": 1,
+    "final_fresh_challenger_identities_per_bundle_cycle": 1,
+    "agent_phase_expected_max_minutes": 30,
+    "implementation_cycle_expected_max_minutes": 180,
+    "timeout_can_relax_gate": false,
+    "timeout_can_claim_go": false
+  },
+  "publication_requires_user_approval": true,
+  "new_experiment_requires_user_approval": true
+}

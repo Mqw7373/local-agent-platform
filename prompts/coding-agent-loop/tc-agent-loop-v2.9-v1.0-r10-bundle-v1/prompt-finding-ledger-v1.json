@@ -1,0 +1,39 @@
+{
+  "schema_version": "1",
+  "revision": "TC-SESSION-PROMPT-v2.9",
+  "predecessor_revision": "TC-SESSION-PROMPT-v2.8",
+  "predecessor_sha256": "f29a59765f7809a769d39de33f64d14ea4e5f45b19cf40239c6b53826870d5c7",
+  "findings": [
+    {
+      "prompt_finding_id": "PROMPT-R10-001",
+      "classification": "PROMPT_DEFECT",
+      "evidence": "Core Prompt v2.8 required Fresh Challenger and Adjudicator for every green candidate, even when Reviewer evidence established a clear code defect, document defect, external stop, or no P0/P1. Its Reviewer contract also made every finding an unaccepted proposal, so Reviewer could not directly route an unambiguous outcome. This added two model calls to every review cycle and made missing Challenger credentials block otherwise conclusive outcomes.",
+      "affected_clauses": [
+        "v2.8 section 3 Canonical workflow",
+        "v2.8 section 5 Reviewer",
+        "v2.8 section 6 Fresh Clean-room Challenger",
+        "v2.8 section 7 Adjudicator",
+        "v2.8 section 10 Human Final Confirmation",
+        "v2.8 section 11 Reference state machine"
+      ],
+      "minimal_revision": "Give a fresh read-only Reviewer a structured direct-routing contract for clear outcomes; invoke fresh Challenger and read-only Adjudicator only for high-risk, insufficient-evidence, mixed-root, or conflicting conclusions; keep Human as sole GO authority and Developer as sole product writer.",
+      "trigger_evidence": {
+        "source_task": "01a0188d-43b4-7660-9ca5-703fe006079a",
+        "user_approval_date": "2026-09-08",
+        "observed_mastra_path": "candidate-review-cycle always executed .parallel([reviewerStep, freshChallengerStep]) then adjudicatorStep",
+        "observed_langgraph_path": "automated_verification returned both reviewer and challenger nodes, which unconditionally joined at adjudicator"
+      },
+      "impact_on_active_round": "STOP_AND_RERUN_REQUIRED",
+      "compatibility": "Existing v2.8/v0.9 runs retain immutable authority. Only new runs use v2.9/v1.0 conditional escalation.",
+      "regression_scenarios": [
+        "A green candidate with NO_P0_P1 reaches Human Final Confirmation without Challenger or Adjudicator invocation.",
+        "A clear CODE_DEFECT P1 routes directly from Reviewer to Developer.",
+        "A clear FROZEN_DOCUMENT_DEFECT P1 stops for Document Owner, human approval, and a superseding Bundle.",
+        "Only ESCALATE invokes a fresh DeepSeek Challenger followed by Astra Adjudicator.",
+        "Missing Challenger credentials do not affect a non-escalated Reviewer outcome.",
+        "Developer remains the only product-write role on both direct and escalated paths."
+      ],
+      "status": "APPROVED_FOR_PUBLICATION"
+    }
+  ]
+}

@@ -1,0 +1,177 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/tc/compact-frozen-bundle.schema.v2.json",
+  "title": "TC Compact Frozen Implementation Bundle v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "bundle_id",
+    "bundle_version",
+    "bundle_status",
+    "predecessor_bundle_sha256",
+    "documents",
+    "allowed_scope",
+    "forbidden_scope",
+    "acceptance_checks",
+    "changes_existing_persisted_data",
+    "human_approval"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "tc-compact-frozen-bundle.v2"
+    },
+    "bundle_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "bundle_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "bundle_status": {
+      "enum": [
+        "CANDIDATE_AWAITING_HUMAN_APPROVAL",
+        "FROZEN_FOR_IMPLEMENTATION"
+      ]
+    },
+    "predecessor_bundle_sha256": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/sha256"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "documents": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "document_roles",
+          "source_type",
+          "path_or_embedded_id",
+          "sha256"
+        ],
+        "properties": {
+          "document_roles": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "enum": [
+                "PRD",
+                "ADR",
+                "SYSTEM_DESIGN",
+                "API_CONTRACT",
+                "ACCEPTANCE_CRITERIA",
+                "MIGRATION_CONTRACT"
+              ]
+            }
+          },
+          "source_type": {
+            "enum": [
+              "FILE",
+              "EMBEDDED_PROMPT"
+            ]
+          },
+          "path_or_embedded_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "$ref": "#/$defs/sha256"
+          }
+        }
+      }
+    },
+    "allowed_scope": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/scopedPath"
+      }
+    },
+    "forbidden_scope": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "acceptance_checks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "check_id",
+          "command",
+          "required_exit_code"
+        ],
+        "properties": {
+          "check_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "command": {
+            "type": "string",
+            "minLength": 1
+          },
+          "required_exit_code": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "changes_existing_persisted_data": {
+      "type": "boolean"
+    },
+    "human_approval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "reference"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "PENDING",
+            "APPROVED"
+          ]
+        },
+        "reference": {
+          "oneOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "scopedPath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?![A-Za-z]:)(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*[\\*?\\[\\]])(?!.*//)[^\\\\]+$"
+    }
+  }
+}
+

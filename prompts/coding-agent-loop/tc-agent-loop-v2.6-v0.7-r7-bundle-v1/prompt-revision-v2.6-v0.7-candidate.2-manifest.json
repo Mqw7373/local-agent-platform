@@ -1,0 +1,66 @@
+{
+  "schema_version": "tc-prompt-revision-candidate-manifest.v2",
+  "revision_set_id": "TC-LATENCY-BOUNDED-AGENT-LOOP-V2.6-V0.7-CANDIDATE.2",
+  "prompt_finding_ids": [
+    "PF-R7-001-REMEDIATION-LOOP-LATENCY",
+    "PF-R7-002-DEVELOPER-ONLY-PRODUCT-WRITE-AUTHORITY"
+  ],
+  "publication_status": "CANDIDATE_AWAITING_HUMAN_APPROVAL",
+  "active_round_effect": "NO_EFFECT_ON_ACTIVE_ROUND",
+  "candidate_predecessor": {
+    "manifest": "outputs/prompt-revision-v2.6-v0.7-candidate.1-manifest.json",
+    "manifest_sha256": "3dd8131f1668efed69be111d378e18e5174c4c9163c37ed8f7ad9493e58ec402"
+  },
+  "durable_predecessor": {
+    "snapshot_directory": "published/tc-agent-loop-v2.5.1-v0.6.1-bundle-v2",
+    "snapshot_manifest_sha256": "aafdbdac66fba8e21dc4c00f39c26eb737e68cb0c9ec7b0e78789ca5fa237bf7",
+    "archive_file": "published/tc-agent-loop-v2.5.1-v0.6.1-bundle-v2.zip",
+    "archive_sha256": "80080ff7867fbcda82d0792aebeaa701e10b8447120ce45cb819c542f5b63410"
+  },
+  "files": [
+    {
+      "role": "CORE_PROMPT",
+      "path": "outputs/core-prompt-v2.6-candidate.2.md",
+      "sha256": "39d4b97ff1732c1fb21da6f3a77dbe43138b2402edb827fec3f04734676e404d",
+      "predecessor_sha256": "bf110412410a0ba70bbb86017f16bea3ecfdd315edc5917a7b4898a7d8b5a454"
+    },
+    {
+      "role": "INTEGRATED_ADAPTER",
+      "path": "outputs/experiment-adapter-v0.7-candidate.2.md",
+      "sha256": "f41ffec019c3ea5eb32655c22605075cee81239b2a24fff991034504d6077893",
+      "predecessor_sha256": "7049e9812f7af1a2528ab437e6c50f4c643b40b7100130db3d1e243c50f4472c"
+    },
+    {
+      "role": "R7_BUNDLE_CANDIDATE",
+      "path": "outputs/r7-latency-bounded-bundle-v1-candidate.2.json",
+      "sha256": "227515f7e79671617e82cfe3806a39d4e3fa93cfea68a4be3132e72601c7a32f",
+      "predecessor_sha256": "118d0e0d4f64b406427268a719d267b727580e88d9ec303169164a18cb5b427c"
+    },
+    {
+      "role": "STRUCTURAL_DIFF",
+      "path": "outputs/prompt-revision-v2.6-v0.7-candidate.2-structural-diff.md",
+      "sha256": "3b6e96732cc7fb898a82249895ee999de58663aa87bb1f83337b3a6f2ad79903"
+    },
+    {
+      "role": "FINDING_LEDGER",
+      "path": "outputs/prompt-finding-escape-ledger-v13.json",
+      "sha256": "1a2f3c593ca898127691ca45e8db94cbfac2d373d95215cb4d7740e81158e244"
+    }
+  ],
+  "write_authority": {
+    "sole_product_writer_role": "Developer",
+    "all_other_develop_loop_roles_product_read_only": true,
+    "indirect_non_developer_product_writes_forbidden": true,
+    "unauthorized_write_result": "UNAUTHORIZED_PRODUCT_WRITE_VIOLATION"
+  },
+  "workflow_limits": {
+    "full_discovery_review_pairs_per_bundle_cycle": 1,
+    "final_fresh_challenger_identities_per_bundle_cycle": 1,
+    "agent_phase_expected_max_minutes": 30,
+    "implementation_cycle_expected_max_minutes": 180,
+    "timeout_can_relax_gate": false,
+    "timeout_can_claim_go": false
+  },
+  "publication_requires_user_approval": true,
+  "new_experiment_requires_user_approval": true
+}

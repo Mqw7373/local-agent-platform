@@ -1,0 +1,51 @@
+{
+  "schema_version": "1",
+  "publication_status": "APPROVED_FOR_PUBLICATION",
+  "revision": "TC-SESSION-PROMPT-v2.9",
+  "adapter_revision": "v1.0",
+  "bundle_revision": "R10-bundle-v1",
+  "predecessor": {
+    "revision": "TC-SESSION-PROMPT-v2.8",
+    "core_sha256": "f29a59765f7809a769d39de33f64d14ea4e5f45b19cf40239c6b53826870d5c7",
+    "publication_manifest_sha256": "535ac4bc32cfe0120845f48f05ea5d41323f418315f53f65f749a31586237940"
+  },
+  "approval": {
+    "approved_by": "user",
+    "approved_at": "2026-09-08",
+    "receipt": "publication-approval-receipt-v1.json",
+    "scope": "Reviewer directly routes clear outcomes; Challenger and Adjudicator are fresh read-only escalation roles only. Developer remains sole product writer and Human remains sole GO authority."
+  },
+  "authority": {
+    "core_prompt": "core-prompt-v2.9.md",
+    "core_prompt_sha256": "865da58c80dc9afd904ab476c0407bad4258b6edc7505f78c9473d7c5174481e",
+    "adapter": "adapter-v1.0.md",
+    "adapter_sha256": "4a1cc7ee7896e0e0110d566c4583a3afb575ea9dff0d4e472c6984d19bbd781f"
+  },
+  "files": [
+    {
+      "path": "core-prompt-v2.9.md",
+      "sha256": "865da58c80dc9afd904ab476c0407bad4258b6edc7505f78c9473d7c5174481e"
+    },
+    {
+      "path": "adapter-v1.0.md",
+      "sha256": "4a1cc7ee7896e0e0110d566c4583a3afb575ea9dff0d4e472c6984d19bbd781f"
+    },
+    {
+      "path": "prompt-revision-exact-diff-v1.json",
+      "sha256": "f0f151a091cde05256a29d2ea18f5af1dea35b804b2d66ba9d274dfb2c73c67e"
+    },
+    {
+      "path": "prompt-finding-ledger-v1.json",
+      "sha256": "2faa6ee88f6c53ee8076f8e609688c0fb30cf31a29e18bfd6a69820d7f5cc011"
+    },
+    {
+      "path": "publication-approval-receipt-v1.json",
+      "sha256": "72ce4318b568b80f7535c8aafd6010148046bd38924b752330450c335e9347c7"
+    },
+    {
+      "path": "README.md",
+      "sha256": "59fdebd9607f1635cd1c655aa058af90f5303047706e434d27fa48a5b4513e34"
+    }
+  ],
+  "compatibility": "Existing v2.8/v0.9 runs retain immutable authority. New Mastra and LangGraph runs use v2.9/v1.0 conditional escalation while retaining recovery and observation infrastructure."
+}

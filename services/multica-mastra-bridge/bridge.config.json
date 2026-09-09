@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "server": {
+    "host": "127.0.0.1",
+    "port": 4120,
+    "controlTokenEnv": "MULTICA_MASTRA_BRIDGE_TOKEN"
+  },
+  "polling": {
+    "enabled": true,
+    "intervalMs": 5000
+  },
+  "stateFile": "${LOCAL_AGENT_PLATFORM_HOME}/state/multica-mastra-bridge.json",
+  "multicaConnections": {
+    "local": {
+      "baseUrl": "http://localhost:8080",
+      "workspaceId": "${MULTICA_WORKSPACE_ID}",
+      "token": "${MULTICA_TOKEN}",
+      "timeoutMs": 15000
+    }
+  },
+  "mastraConnections": {
+    "coding-platform": {
+      "baseUrl": "http://localhost:4113",
+      "apiPrefix": "/api",
+      "timeoutMs": 15000
+    }
+  },
+  "bindings": {
+    "cambioml-computer-use": {
+      "enabled": true,
+      "multicaConnection": "local",
+      "multicaProjectId": "${MULTICA_PROJECT_CAMBIOML_ID}",
+      "mastraConnection": "coding-platform",
+      "workflowId": "codingAgentLoopWorkflow",
+      "adapter": "coding-agent-loop",
+      "adapterConfig": {
+        "projectProfile": "cambioml-test"
+      },
+      "trigger": {
+        "bindingKey": "mastra_bridge.binding",
+        "actionKey": "mastra_bridge.action",
+        "actionValue": "start"
+      },
+      "issueStatuses": {
+        "running": "in_progress",
+        "human": "in_review",
+        "blocked": "blocked",
+        "go": "done",
+        "noGo": "cancelled",
+        "canceled": "cancelled"
+      }
+    }
+  }
+}

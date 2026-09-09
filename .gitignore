@@ -1,0 +1,20 @@
+**/node_modules/
+**/dist/
+**/.next/
+**/.vinext/
+**/.mastra/
+**/.wrangler/
+**/.env
+**/.env.*
+!**/.env.example
+**/.venv/
+**/__pycache__/
+**/.pytest_cache/
+**/*.egg-info/
+*.log
+
+# Machine- and product-specific Coding Platform configuration stays local.
+/services/mastra-coding-platform/coding-agent.profiles.json
+/services/mastra-coding-platform/profiles/*.json
+!/services/mastra-coding-platform/profiles/*.example.json
+!/services/mastra-coding-platform/profiles/README.md

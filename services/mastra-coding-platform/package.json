@@ -1,0 +1,38 @@
+{
+  "name": "mastra-coding-platform",
+  "version": "0.1.0",
+  "private": true,
+  "license": "Apache-2.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "dev": "mastra dev",
+    "build": "mastra build",
+    "start": "mastra start",
+    "typecheck": "tsc --noEmit",
+    "self-test": "tsx scripts/self-test.ts",
+    "codex-adapter-test": "tsx scripts/codex-adapter-test.ts",
+    "runtime-recovery-test": "tsx scripts/runtime-recovery-test.ts",
+    "writer-lock-test": "tsx scripts/writer-lock-test.ts",
+    "ponytail-ab-test": "tsx scripts/ponytail-ab-test.ts",
+    "codex-cli-smoke": "tsx scripts/codex-cli-smoke.ts",
+    "codex:status": "codex login status",
+    "smoke-test": "tsx scripts/smoke-workflow.ts",
+    "profile-isolation-test": "tsx scripts/profile-isolation-test.ts",
+    "profiles": "tsx scripts/list-profiles.ts",
+    "freeze-bundle": "tsx scripts/freeze-bundle.ts"
+  },
+  "dependencies": {
+    "@mastra/core": "1.63.0",
+    "@mastra/libsql": "1.22.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "mastra": "1.27.0",
+    "tsx": "^4.23.12",
+    "typescript": "^6.0.3"
+  }
+}

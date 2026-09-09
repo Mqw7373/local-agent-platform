@@ -1,0 +1,13 @@
+{
+  "allowedRoots": [
+    "../..",
+    "${USERPROFILE}/Documents/github"
+  ],
+  "profiles": {
+    "example": {
+      "configFile": "./coding-agent.config.json",
+      "enabled": true,
+      "description": "Template profile; copy and customize it for a local repository"
+    }
+  }
+}

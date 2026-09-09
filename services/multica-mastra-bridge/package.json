@@ -1,0 +1,16 @@
+{
+  "name": "multica-mastra-bridge",
+  "version": "0.1.0",
+  "private": true,
+  "license": "Apache-2.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "start": "node src/index.mjs",
+    "dev": "node --watch src/index.mjs",
+    "test": "node --test",
+    "check": "node --check src/index.mjs && node --test"
+  }
+}

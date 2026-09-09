@@ -1,0 +1,62 @@
+{
+  "schema_version": "tc-prompt-publication-manifest.v3",
+  "publication_id": "TC-PROMPT-PUBLICATION-v2.6-v0.7-R7-BUNDLE-v1",
+  "published_at_utc": "2026-08-20T05:14:59.1141895Z",
+  "publication_status": "APPROVED_FOR_PUBLICATION_R7_NOT_LAUNCHED",
+  "approval_turn_id": "01a01d97-9cdb-7f20-bb3b-f162004fc804",
+  "approval_text": "人工批准发布",
+  "candidate_manifest": {
+    "file": "prompt-revision-v2.6-v0.7-candidate.2-manifest.json",
+    "sha256": "0e904d0ea3a87b7fec4ef018f0fa0e02708066058fb17b2f2e1f0363d44cb773"
+  },
+  "published_files": [
+    {
+      "role": "CORE_PROMPT",
+      "file": "core-prompt-v2.6-candidate.2.md",
+      "sha256": "39d4b97ff1732c1fb21da6f3a77dbe43138b2402edb827fec3f04734676e404d",
+      "size_bytes": 21058
+    },
+    {
+      "role": "ADAPTER_AND_INTEGRATED_FROZEN_DOCUMENT",
+      "file": "experiment-adapter-v0.7-candidate.2.md",
+      "sha256": "f41ffec019c3ea5eb32655c22605075cee81239b2a24fff991034504d6077893",
+      "size_bytes": 15318
+    },
+    {
+      "role": "COMPACT_BUNDLE_SCHEMA",
+      "file": "compact-frozen-bundle.schema.v2.json",
+      "sha256": "aa79ed8c28e66c4cd1dd78b01a7f789d531ac04ed18755da09f957ebdffa743e",
+      "size_bytes": 3860
+    },
+    {
+      "role": "APPROVED_R7_COMPACT_BUNDLE",
+      "file": "r7-latency-bounded-bundle-v1-published.json",
+      "sha256": "7ebd016a6fce0e841e2bf907bfe7451bf557fa46b8c0e32b384d04fcf4c880dc",
+      "size_bytes": 1433
+    },
+    {
+      "role": "STRUCTURAL_DIFF",
+      "file": "prompt-revision-v2.6-v0.7-candidate.2-structural-diff.md",
+      "sha256": "3b6e96732cc7fb898a82249895ee999de58663aa87bb1f83337b3a6f2ad79903",
+      "size_bytes": 2769
+    },
+    {
+      "role": "APPEND_ONLY_FINDING_LEDGER",
+      "file": "prompt-finding-escape-ledger-v14.json",
+      "sha256": "ed79ea0db2377d5c4ee76f0b31aeede74fd899396641651e7922c9f1751ce18e",
+      "size_bytes": 1140
+    }
+  ],
+  "write_authority": {
+    "sole_product_writer_role": "Developer",
+    "all_other_develop_loop_roles_product_read_only": true,
+    "unauthorized_write_result": "UNAUTHORIZED_PRODUCT_WRITE_VIOLATION"
+  },
+  "launch_authority": {
+    "target_round": "R7_LATENCY_BOUNDED_CLEAN_ROOM",
+    "status": "NOT_GRANTED_BY_THIS_PUBLICATION_APPROVAL",
+    "new_user_launch_instruction_required": true,
+    "new_projectless_directory_required": true,
+    "earlier_round_code_or_memory_reuse": false
+  }
+}

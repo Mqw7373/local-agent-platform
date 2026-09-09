@@ -1,0 +1,29 @@
+{
+  "schema_version": "tc-prompt-finding-escape-ledger.segment.v14",
+  "ledger_id": "TC-PROMPT-FINDING-ESCAPE-LEDGER",
+  "owner_task_id": "01a0188d-43b4-7660-9ca5-703fe006079a",
+  "record_policy": "APPEND_ONLY",
+  "previous_ledger": {
+    "file": "prompt-finding-escape-ledger-v13.json",
+    "file_sha256": "1a2f3c593ca898127691ca45e8db94cbfac2d373d95215cb4d7740e81158e244"
+  },
+  "publication_events": [
+    {
+      "event_id": "TC-PROMPT-PUBLICATION-v2.6-v0.7-R7-BUNDLE-v1",
+      "approval_turn_id": "01a01d97-9cdb-7f20-bb3b-f162004fc804",
+      "approval_text": "人工批准发布",
+      "approved_at_utc": "2026-08-20T05:14:59.1141895Z",
+      "approved_findings": [
+        "PF-R7-001-REMEDIATION-LOOP-LATENCY",
+        "PF-R7-002-DEVELOPER-ONLY-PRODUCT-WRITE-AUTHORITY"
+      ],
+      "candidate_manifest": {
+        "file": "prompt-revision-v2.6-v0.7-candidate.2-manifest.json",
+        "sha256": "0e904d0ea3a87b7fec4ef018f0fa0e02708066058fb17b2f2e1f0363d44cb773"
+      },
+      "publication_status": "APPROVED_FOR_PUBLICATION",
+      "active_round_effect": "NO_EFFECT_ON_R6",
+      "r7_launch_status": "NOT_LAUNCHED"
+    }
+  ]
+}

@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LangGraph Coding Console</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #080b10;
+      --panel: rgba(18, 23, 32, .86);
+      --panel-2: rgba(24, 31, 42, .92);
+      --line: rgba(155, 177, 205, .18);
+      --text: #edf4ff;
+      --muted: #8e9bae;
+      --cyan: #62dfff;
+      --lime: #c8ff72;
+      --amber: #ffc66d;
+      --red: #ff7e79;
+      --violet: #ac9cff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 12% -5%, rgba(98, 223, 255, .12), transparent 27%),
+        radial-gradient(circle at 92% 14%, rgba(172, 156, 255, .12), transparent 25%),
+        var(--bg);
+      font: 14px/1.5 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    button, input, textarea, select { font: inherit; }
+    button { cursor: pointer; }
+    .shell { width: min(1480px, calc(100% - 32px)); margin: 0 auto; padding: 28px 0 56px; }
+    header { display: flex; justify-content: space-between; align-items: center; gap: 24px; margin-bottom: 24px; }
+    .brand { display: flex; align-items: center; gap: 14px; }
+    .mark { width: 42px; height: 42px; display: grid; place-items: center; border: 1px solid rgba(98,223,255,.35); border-radius: 13px; background: rgba(98,223,255,.09); color: var(--cyan); font-weight: 800; }
+    h1 { margin: 0; font-size: 19px; letter-spacing: -.02em; }
+    .sub { color: var(--muted); font-size: 12px; }
+    .health { display: flex; align-items: center; gap: 9px; border: 1px solid var(--line); border-radius: 999px; padding: 8px 12px; color: var(--muted); }
+    .health i { width: 8px; height: 8px; border-radius: 50%; background: #707985; }
+    .health.online i { background: var(--lime); box-shadow: 0 0 12px rgba(200,255,114,.65); }
+    .layout { display: grid; grid-template-columns: minmax(300px, 390px) minmax(0, 1fr); gap: 18px; }
+    .panel { border: 1px solid var(--line); border-radius: 20px; background: var(--panel); box-shadow: 0 20px 70px rgba(0,0,0,.22); backdrop-filter: blur(14px); }
+    .controls { padding: 22px; align-self: start; position: sticky; top: 16px; }
+    .panel-title { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+    .panel-title h2 { margin: 0; font-size: 15px; }
+    .tag { border: 1px solid rgba(98,223,255,.25); border-radius: 999px; padding: 4px 8px; color: var(--cyan); font: 600 10px/1.2 ui-monospace, SFMono-Regular, Consolas, monospace; }
+    label { display: block; margin: 15px 0 7px; color: #b7c1cf; font-size: 12px; font-weight: 650; }
+    select, textarea, input {
+      width: 100%; border: 1px solid var(--line); border-radius: 11px; outline: none; padding: 11px 12px;
+      color: var(--text); background: rgba(4,8,13,.72); transition: border-color .16s, box-shadow .16s;
+    }
+    select:focus, textarea:focus, input:focus { border-color: rgba(98,223,255,.58); box-shadow: 0 0 0 3px rgba(98,223,255,.09); }
+    textarea { min-height: 132px; resize: vertical; }
+    .buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-top: 14px; }
+    .button { border: 0; border-radius: 11px; padding: 11px 13px; font-weight: 750; background: var(--cyan); color: #071016; }
+    .button.secondary { background: rgba(255,255,255,.07); color: var(--text); border: 1px solid var(--line); }
+    .button:disabled { opacity: .45; cursor: not-allowed; }
+    .notice { margin-top: 16px; padding: 12px; border: 1px solid rgba(255,198,109,.24); border-radius: 11px; background: rgba(255,198,109,.07); color: #d8c6a6; font-size: 11px; }
+    .main { display: grid; gap: 18px; }
+    .graph { padding: 24px; overflow: hidden; }
+    .flow { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .node {
+      width: min(420px, 92%); position: relative; border: 1px solid var(--line); border-radius: 13px; padding: 12px 16px;
+      background: var(--panel-2); color: #b9c4d3; text-align: center; transition: .2s ease;
+    }
+    .node strong { display: block; color: var(--text); font-size: 13px; }
+    .node small { color: var(--muted); }
+    .node.active { border-color: var(--cyan); box-shadow: 0 0 0 3px rgba(98,223,255,.09), 0 0 34px rgba(98,223,255,.13); transform: scale(1.015); }
+    .node.active::after { content: "RUNNING"; position: absolute; right: 8px; top: 8px; color: var(--cyan); font: 700 8px/1 ui-monospace, monospace; }
+    .node.stop { border-color: rgba(255,126,121,.5); }
+    .arrow { height: 18px; width: 1px; background: linear-gradient(var(--line), rgba(98,223,255,.55)); position: relative; }
+    .arrow::after { content: ""; position: absolute; left: -3px; bottom: 0; width: 6px; height: 6px; border-right: 1px solid var(--cyan); border-bottom: 1px solid var(--cyan); transform: rotate(45deg); }
+    .loop-label { color: var(--amber); font: 600 9px/1.2 ui-monospace, monospace; letter-spacing: .06em; }
+    .parallel { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-items: center; }
+    .parallel .node { width: 100%; }
+    .parallel-wrap { width: min(760px, 100%); padding: 14px; border: 1px dashed rgba(172,156,255,.3); border-radius: 17px; background: rgba(172,156,255,.035); }
+    .parallel-title { margin-bottom: 10px; color: var(--violet); text-align: center; font: 650 9px/1 ui-monospace, monospace; letter-spacing: .1em; }
+    .status-panel { padding: 22px; }
+    .metrics { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px; }
+    .metric { min-height: 86px; border: 1px solid var(--line); border-radius: 13px; padding: 13px; background: rgba(0,0,0,.16); }
+    .metric span { display: block; color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: .08em; }
+    .metric strong { display: block; margin-top: 9px; font-size: 14px; overflow-wrap: anywhere; }
+    .summary { margin-top: 14px; border-left: 3px solid var(--cyan); padding: 9px 12px; color: #c4ceda; background: rgba(98,223,255,.04); }
+    .human { display: none; margin-top: 14px; padding: 15px; border: 1px solid rgba(255,198,109,.32); border-radius: 13px; background: rgba(255,198,109,.06); }
+    .human.visible { display: block; }
+    .human h3 { margin: 0 0 8px; font-size: 13px; color: var(--amber); }
+    .human-actions { display: flex; gap: 8px; margin-top: 10px; }
+    .human-actions .button { flex: 1; }
+    .human-actions .no-go { background: var(--red); }
+    details { margin-top: 15px; }
+    summary { cursor: pointer; color: var(--muted); font-size: 11px; }
+    pre { max-height: 380px; overflow: auto; border: 1px solid var(--line); border-radius: 11px; padding: 12px; color: #aebbd0; background: #05080c; font: 11px/1.55 ui-monospace, SFMono-Regular, Consolas, monospace; white-space: pre-wrap; overflow-wrap: anywhere; }
+    .error { color: var(--red); }
+    @media (max-width: 940px) { .layout { grid-template-columns: 1fr; } .controls { position: static; } .metrics { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 560px) { .shell { width: min(100% - 18px, 1480px); } header { align-items: flex-start; flex-direction: column; } .parallel { grid-template-columns: 1fr; } .metrics { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <div class="brand"><div class="mark">LG</div><div><h1>LangGraph Coding Console</h1><div class="sub">Prompt v2.9 · Reviewer direct routing · conditional escalation · Developer-only writes</div></div></div>
+      <div id="health" class="health"><i></i><span>Connecting</span></div>
+    </header>
+    <div class="layout">
+      <aside class="panel controls">
+        <div class="panel-title"><h2>Run control</h2><span class="tag">LANGGRAPH</span></div>
+        <label for="profile">Project Profile</label>
+        <select id="profile"></select>
+        <label for="task">Implementation task</label>
+        <textarea id="task">Close the local implementation and deterministic test gaps for financial-agent.rag.v1 against the frozen PRD, System Design and API Contract. Preserve the existing working tree. Do not deploy, call paid/external providers, mutate live runtime data, or perform destructive migration.</textarea>
+        <div class="buttons"><button id="start" class="button">Start run</button><button id="refresh" class="button secondary">Refresh</button></div>
+        <label for="run-id">Attach existing Run ID</label>
+        <input id="run-id" placeholder="Paste a LangGraph run ID">
+        <button id="attach" class="button secondary" style="width:100%;margin-top:9px">Attach</button>
+        <div class="notice">真实 Profile 会调用独立 Codex Developer（gpt-6-astra），并可能修改其 allowed scope 内的仓库文件。Reviewer 通过明确结论直接路由；仅 ESCALATE 才调用只读 DeepSeek Challenger 和 Astra Adjudicator。</div>
+      </aside>
+      <main class="main">
+        <section class="panel graph">
+          <div class="panel-title"><h2>Live workflow</h2><span id="engine-state" class="tag">IDLE</span></div>
+          <div class="flow">
+            <div class="node" data-node="runtime_preflight"><strong>Runtime & Bundle Preflight</strong><small>Profile · Prompt SHA · frozen document bytes</small></div>
+            <div class="arrow"></div>
+            <div class="node" data-node="document_preflight"><strong>Document Preflight · Sol</strong><small>Consistency and implementation sufficiency</small></div>
+            <div class="arrow"></div>
+            <div class="node" data-node="developer"><strong>Developer · Astra</strong><small>Only product-write role · strict TDD</small></div>
+            <div class="arrow"></div>
+            <div class="node" data-node="automated_verification"><strong>Automated Verification</strong><small>Focused RAG contract suite + compile</small></div>
+            <div class="loop-label">FAIL ↺ DEVELOPER</div>
+            <div class="arrow"></div>
+            <div class="node" data-node="reviewer"><strong>Fresh Reviewer · Sol</strong><small>Direct route: code · document · external · no P0/P1</small></div>
+            <div class="loop-label">CLEAR CODE P0/P1 ↺ DEVELOPER · CLEAR DOCUMENT P0/P1 ↯ STOP</div>
+            <div class="arrow"></div>
+            <div class="parallel-wrap">
+              <div class="parallel-title">ONLY WHEN REVIEWER RETURNS ESCALATE</div>
+              <div class="flow"><div class="node" data-node="challenger"><strong>Fresh Challenger · DeepSeek</strong><small>Independent high-risk/conflict investigation</small></div><div class="arrow"></div><div class="node" data-node="adjudicator"><strong>Adjudicator · Astra</strong><small>Resolve evidence and root-cause conflict</small></div></div>
+            </div>
+            <div class="arrow"></div>
+            <div class="node" data-node="human_final_confirmation"><strong>Human Final Confirmation</strong><small>Exact run · Bundle SHA · snapshot SHA binding</small></div>
+          </div>
+        </section>
+        <section class="panel status-panel">
+          <div class="panel-title"><h2>Run evidence</h2><span id="updated" class="sub">No run attached</span></div>
+          <div class="metrics">
+            <div class="metric"><span>Execution</span><strong id="execution">IDLE</strong></div>
+            <div class="metric"><span>Execution attempts</span><strong id="attempts">0</strong></div>
+            <div class="metric"><span>Applied batches</span><strong id="batches">0</strong></div>
+            <div class="metric"><span>Bundle SHA</span><strong id="bundle">—</strong></div>
+            <div class="metric"><span>Snapshot SHA</span><strong id="snapshot">—</strong></div>
+            <div class="metric"><span>Current operation</span><strong id="operation">—</strong></div>
+            <div class="metric"><span>Last activity</span><strong id="activity">—</strong></div>
+            <div class="metric"><span>Elapsed</span><strong id="elapsed">—</strong></div>
+            <div class="metric"><span>Remaining timeout</span><strong id="remaining">—</strong></div>
+            <div class="metric"><span>Recovery decision</span><strong id="recovery">—</strong></div>
+          </div>
+          <div id="summary" class="summary">Start or attach a run to view live evidence.</div>
+          <div id="human" class="human"><h3>Human confirmation required</h3><div id="binding" class="sub"></div><label for="confirmed-by">Confirmed by</label><input id="confirmed-by" placeholder="Human reviewer name"><label for="note">Note</label><input id="note" placeholder="Decision note"><div class="human-actions"><button id="go" class="button">GO</button><button id="no-go" class="button no-go">NO-GO</button></div></div>
+          <details><summary>Raw checkpoint state</summary><pre id="raw">{}</pre></details>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script>
+    const $ = (id) => document.getElementById(id);
+    let currentRunId = localStorage.getItem('langgraph-coding-run') || '';
+    let pollTimer;
+    let latestInterrupt;
+
+    function shortSha(value) { return value ? `${value.slice(0, 10)}…${value.slice(-6)}` : '—'; }
+    function duration(value) { if (value == null) return '—'; const seconds = Math.max(0, Math.round(value / 1000)); return `${Math.floor(seconds / 60)}m ${seconds % 60}s`; }
+    function setBusy(value) { $('start').disabled = value; $('attach').disabled = value; }
+    function activeNodes(payload) {
+      if (payload?.executionStatus === 'FAILED') return new Set();
+      const next = new Set(payload?.next || []);
+      if (next.size) return next;
+      const route = payload?.state?.route;
+      return new Set({
+        DOCUMENT_PREFLIGHT: ['document_preflight'], DEVELOP: ['developer'], VERIFICATION_REPAIR: ['developer'],
+        VERIFY: ['automated_verification'], REVIEW: ['reviewer'], ESCALATE: ['challenger'], HUMAN_CONFIRMATION: ['human_final_confirmation']
+      }[route] || []);
+    }
+    function render(payload) {
+      const state = payload.state || {};
+      const active = activeNodes(payload);
+      document.querySelectorAll('[data-node]').forEach((node) => {
+        node.classList.toggle('active', active.has(node.dataset.node));
+        node.classList.toggle('stop', payload.executionStatus === 'FAILED' || state.route === 'STOP_DOCUMENT' || state.route === 'STOP_CODE' || state.route === 'STOP_EXTERNAL');
+      });
+      $('engine-state').textContent = payload.executionStatus || 'UNKNOWN';
+      $('execution').textContent = payload.executionStatus || state.status || 'UNKNOWN';
+      const progress = payload.developerProgress || {};
+      $('attempts').textContent = String(state.developer_attempt_count ?? progress.attemptNumber ?? 0);
+      $('batches').textContent = String(state.applied_batch_count ?? state.cycle_count ?? 0);
+      $('operation').textContent = progress.currentOperation || '—';
+      $('activity').textContent = progress.lastActivityAt ? new Date(progress.lastActivityAt).toLocaleTimeString() : '—';
+      $('elapsed').textContent = duration(progress.elapsedMs);
+      $('remaining').textContent = duration(progress.remainingTimeoutMs);
+      $('recovery').textContent = payload.recovery?.assessment?.decision || (progress.status === 'recoverable' ? 'ASSESSMENT REQUIRED' : '—');
+      $('bundle').textContent = shortSha(state.bundle_sha256);
+      $('bundle').title = state.bundle_sha256 || '';
+      $('snapshot').textContent = shortSha(state.snapshot_sha256);
+      $('snapshot').title = state.snapshot_sha256 || '';
+      $('summary').textContent = payload.error || state.summary || 'No summary yet.';
+      $('summary').classList.toggle('error', Boolean(payload.error));
+      $('updated').textContent = `Run ${payload.runId} · ${new Date().toLocaleTimeString()}`;
+      $('raw').textContent = JSON.stringify(payload, null, 2);
+      latestInterrupt = payload.interrupts?.[0];
+      const waiting = payload.executionStatus === 'AWAITING_HUMAN_CONFIRMATION' && latestInterrupt;
+      $('human').classList.toggle('visible', Boolean(waiting));
+      if (waiting) $('binding').textContent = `run ${latestInterrupt.runId} · bundle ${shortSha(latestInterrupt.bundleSha256)} · snapshot ${shortSha(latestInterrupt.snapshotSha256)}`;
+      setBusy(payload.executionStatus === 'RUNNING');
+    }
+    async function loadHealth() {
+      try {
+        const response = await fetch('/healthz');
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const payload = await response.json();
+        $('health').classList.add('online');
+        $('health').querySelector('span').textContent = `${payload.engine} · ${payload.promptAuthority.revision}`;
+        $('profile').replaceChildren(...payload.profiles.map((item) => {
+          const option = document.createElement('option'); option.value = item.id; option.textContent = `${item.id} — ${item.description}`; return option;
+        }));
+        if ([...$('profile').options].some((item) => item.value === 'financial-agent-rag-v1')) $('profile').value = 'financial-agent-rag-v1';
+      } catch (error) {
+        $('health').querySelector('span').textContent = `Offline · ${error.message}`;
+      }
+    }
+    async function refreshRun() {
+      if (!currentRunId) return;
+      try {
+        const response = await fetch(`/runs/${encodeURIComponent(currentRunId)}`);
+        const payload = await response.json();
+        if (!response.ok) throw new Error(payload.detail || `HTTP ${response.status}`);
+        if (payload.executionStatus === 'FAILED') {
+          const recoveryResponse = await fetch(`/runs/${encodeURIComponent(currentRunId)}/recovery`);
+          if (recoveryResponse.ok) payload.recovery = await recoveryResponse.json();
+        }
+        render(payload);
+        clearTimeout(pollTimer);
+        if (payload.executionStatus === 'RUNNING' || payload.executionStatus === 'PAUSED') pollTimer = setTimeout(refreshRun, 2000);
+      } catch (error) {
+        $('summary').textContent = error.message; $('summary').classList.add('error'); setBusy(false);
+      }
+    }
+    async function startRun() {
+      setBusy(true);
+      try {
+        const response = await fetch('/runs', { method: 'POST', headers: {'content-type':'application/json'}, body: JSON.stringify({projectProfile:$('profile').value, task:$('task').value}) });
+        const payload = await response.json();
+        if (!response.ok) throw new Error(payload.detail || `HTTP ${response.status}`);
+        currentRunId = payload.runId; $('run-id').value = currentRunId; localStorage.setItem('langgraph-coding-run', currentRunId); await refreshRun();
+      } catch (error) { $('summary').textContent = error.message; $('summary').classList.add('error'); setBusy(false); }
+    }
+    async function resume(decision) {
+      if (!latestInterrupt) return;
+      const confirmedBy = $('confirmed-by').value.trim();
+      if (!confirmedBy) { $('summary').textContent = 'Human reviewer name is required.'; $('summary').classList.add('error'); return; }
+      const body = {...latestInterrupt, decision, confirmedBy, note:$('note').value}; delete body.status; delete body.summary;
+      const response = await fetch(`/runs/${encodeURIComponent(currentRunId)}/resume`, {method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)});
+      const payload = await response.json();
+      if (!response.ok) { $('summary').textContent = payload.detail || `HTTP ${response.status}`; $('summary').classList.add('error'); return; }
+      await refreshRun();
+    }
+    $('start').addEventListener('click', startRun);
+    $('refresh').addEventListener('click', refreshRun);
+    $('attach').addEventListener('click', () => { currentRunId = $('run-id').value.trim(); if (currentRunId) { localStorage.setItem('langgraph-coding-run', currentRunId); refreshRun(); } });
+    $('go').addEventListener('click', () => resume('GO'));
+    $('no-go').addEventListener('click', () => resume('NO_GO'));
+    loadHealth().then(() => { if (currentRunId) { $('run-id').value = currentRunId; refreshRun(); } });
+  </script>
+</body>
+</html>

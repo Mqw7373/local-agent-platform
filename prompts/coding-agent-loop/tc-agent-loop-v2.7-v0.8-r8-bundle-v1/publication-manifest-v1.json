@@ -1,0 +1,35 @@
+{
+  "schema_version": "1",
+  "publication_status": "APPROVED_FOR_PUBLICATION",
+  "revision": "TC-SESSION-PROMPT-v2.7",
+  "adapter_revision": "v0.8",
+  "bundle_revision": "R8-bundle-v1",
+  "predecessor": {
+    "revision": "TC-SESSION-PROMPT-v2.6-candidate.3",
+    "sha256": "ecba724a62bfa894763b2a48f1d195517f99e3fefb8de8be0748c73df7bd1990"
+  },
+  "approval": {
+    "approved_by": "user",
+    "approved_at": "2026-09-01",
+    "scope": "Remove separate Final Fresh Challenger and Final Adjudication; require Reviewer, fresh clean-room Challenger, and Adjudicator after every Developer snapshot."
+  },
+  "authority": {
+    "core_prompt": "core-prompt-v2.7.md",
+    "core_prompt_sha256": "e736c5a656a4d2b3b654a468d9fa7165ecb92042ebd9a2043f7e077fe416b117"
+  },
+  "files": [
+    {
+      "path": "core-prompt-v2.7.md",
+      "sha256": "e736c5a656a4d2b3b654a468d9fa7165ecb92042ebd9a2043f7e077fe416b117"
+    },
+    {
+      "path": "README.md",
+      "sha256": "6970a906cc3ac225dd96af76be0fc24cf0df582704861ddc8b4a61e1b8636de0"
+    },
+    {
+      "path": "prompt-finding-ledger-v1.json",
+      "sha256": "8977f3ac9163f08aac8a21217327eb4ab5da5358c55ef115b2f733cff6e7c2dc"
+    }
+  ],
+  "compatibility": "Existing and completed v2.6/v0.7 runs retain their original frozen prompt authority. New runs use v2.7/v0.8."
+}

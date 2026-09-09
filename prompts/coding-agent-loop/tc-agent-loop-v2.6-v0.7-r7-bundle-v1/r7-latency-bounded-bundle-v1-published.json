@@ -1,0 +1,52 @@
+{
+  "schema_version": "tc-compact-frozen-bundle.v2",
+  "bundle_id": "TC-DLQ-R7-LATENCY-BOUNDED-BUNDLE",
+  "bundle_version": "1",
+  "bundle_status": "FROZEN_FOR_IMPLEMENTATION",
+  "predecessor_bundle_sha256": "26c639f91125d586367a1255af71855f2cb820d849af80842598d0dfb9952868",
+  "documents": [
+    {
+      "document_roles": [
+        "PRD",
+        "ADR",
+        "SYSTEM_DESIGN",
+        "API_CONTRACT",
+        "ACCEPTANCE_CRITERIA"
+      ],
+      "source_type": "EMBEDDED_PROMPT",
+      "path_or_embedded_id": "TC-PROMPT-WF-VAL-ADAPTER-v0.7-candidate.2",
+      "sha256": "f41ffec019c3ea5eb32655c22605075cee81239b2a24fff991034504d6077893"
+    }
+  ],
+  "allowed_scope": [
+    "src/",
+    "tests/",
+    "pyproject.toml",
+    "README.md"
+  ],
+  "forbidden_scope": [
+    "../",
+    ".codex/",
+    "R1-R6 or any earlier-round directory",
+    "Financial Agent repository",
+    "Persisted predecessor workflow snapshot",
+    "Frozen Bundle bytes"
+  ],
+  "acceptance_checks": [
+    {
+      "check_id": "focused_and_full_tests",
+      "command": "python -m unittest discover -s tests -v",
+      "required_exit_code": 0
+    },
+    {
+      "check_id": "cli_help_smoke",
+      "command": "python -B -m src.durable_lease_queue.cli --help",
+      "required_exit_code": 0
+    }
+  ],
+  "changes_existing_persisted_data": false,
+  "human_approval": {
+    "status": "APPROVED",
+    "reference": "user_turn:01a01d97-9cdb-7f20-bb3b-f162004fc804"
+  }
+}

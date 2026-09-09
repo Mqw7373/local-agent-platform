@@ -1,0 +1,80 @@
+{
+  "projectName": "replace-with-your-project",
+  "projectRoot": "./example-product",
+  "runtimeDir": "${LOCAL_AGENT_PLATFORM_HOME}/runtime/mastra-coding",
+  "corePrompt": {
+    "path": "../../prompts/coding-agent-loop/tc-agent-loop-v2.9-v1.0-r10-bundle-v1/core-prompt-v2.9.md",
+    "sha256": "865da58c80dc9afd904ab476c0407bad4258b6edc7505f78c9473d7c5174481e"
+  },
+  "bundleFile": "./example-product/.agent/frozen-bundle.json",
+  "documents": {
+    "prd": "docs/PRD.md",
+    "adr": "docs/ADR.md",
+    "systemDesign": "docs/System-Design.md",
+    "apiContract": "docs/API-Contract.md",
+    "acceptanceCriteria": "docs/Acceptance-Criteria.md"
+  },
+  "execution": {
+    "backend": "role-routed",
+    "executable": "codex",
+    "timeoutMs": 1800000,
+    "ignoreUserConfig": true,
+    "roles": {
+      "document-preflight": { "backend": "codex-cli", "model": "gpt-5.6-sol" },
+      "developer": { "backend": "codex-cli", "model": "gpt-6-astra" },
+      "reviewer": { "backend": "codex-cli", "model": "gpt-5.6-sol" },
+      "challenger": {
+        "backend": "openai-compatible",
+        "provider": "openrouter",
+        "baseUrl": "https://openrouter.ai/api/v1",
+        "apiKeyEnv": "OPENROUTER_API_KEY",
+        "model": "deepseek/deepseek-v4-flash",
+        "maxToolRounds": 10
+      },
+      "adjudicator": { "backend": "codex-cli", "model": "gpt-6-astra" }
+    }
+  },
+  "developerOptimization": {
+    "ponytail": {
+      "role": "developer",
+      "mode": "lite",
+      "rollout": "ab-test-only",
+      "version": "4.9.0",
+      "sourceCommit": "0a4dd63ad4541f4f655c4108a295916f3c1d8fda",
+      "sourceSha256": "1316a2f3f95741d2300b116fe0c2d81ce4a9568656ed0a62643f54aaf09957f2",
+      "subagentInjection": false,
+      "upstreamHooksExecuted": false,
+      "authorityPrecedence": "frozen-bundle-core-prompt-and-verification-first"
+    }
+  },
+  "promptMode": "distilled",
+  "maxCodeCycles": 3,
+  "protectedPaths": [
+    "docs/**",
+    ".agent/**",
+    "AGENTS.md",
+    "CLAUDE.md"
+  ],
+  "ignore": [
+    ".git",
+    "node_modules",
+    "dist",
+    "build",
+    ".next",
+    "coverage"
+  ],
+  "verificationCommands": [
+    {
+      "id": "typecheck",
+      "command": "npm.cmd",
+      "args": ["run", "typecheck"],
+      "timeoutMs": 600000
+    },
+    {
+      "id": "test",
+      "command": "npm.cmd",
+      "args": ["test"],
+      "timeoutMs": 600000
+    }
+  ]
+}

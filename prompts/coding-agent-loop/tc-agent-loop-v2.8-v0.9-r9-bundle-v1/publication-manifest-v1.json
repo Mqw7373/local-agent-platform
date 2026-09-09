@@ -1,0 +1,35 @@
+{
+  "schema_version": "1",
+  "publication_status": "APPROVED_FOR_PUBLICATION",
+  "revision": "TC-SESSION-PROMPT-v2.8",
+  "adapter_revision": "v0.9",
+  "bundle_revision": "R9-bundle-v1",
+  "predecessor": {
+    "revision": "TC-SESSION-PROMPT-v2.7",
+    "sha256": "e736c5a656a4d2b3b654a468d9fa7165ecb92042ebd9a2043f7e077fe416b117"
+  },
+  "approval": {
+    "approved_by": "user",
+    "approved_at": "2026-09-07",
+    "scope": "Make the previously selected role-model mapping explicit Prompt authority and align the existing Mastra and LangGraph adapters without rebuilding either orchestrator."
+  },
+  "authority": {
+    "core_prompt": "core-prompt-v2.8.md",
+    "core_prompt_sha256": "f29a59765f7809a769d39de33f64d14ea4e5f45b19cf40239c6b53826870d5c7"
+  },
+  "files": [
+    {
+      "path": "core-prompt-v2.8.md",
+      "sha256": "f29a59765f7809a769d39de33f64d14ea4e5f45b19cf40239c6b53826870d5c7"
+    },
+    {
+      "path": "README.md",
+      "sha256": "a6deb5b2dfe24c0ed6b2a00d88e8989a73a8e04d64868e4ad2325e6123adec66"
+    },
+    {
+      "path": "prompt-finding-ledger-v1.json",
+      "sha256": "3e23704bb24a347af046da4cf6db861f07e5b0ffae163a125e5dd7ee37b4a764"
+    }
+  ],
+  "compatibility": "Existing v2.7/v0.8 runs retain their original frozen prompt authority. New Mastra and LangGraph runs use v2.8/v0.9 with exact role routing."
+}

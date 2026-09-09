@@ -1,0 +1,75 @@
+{
+  "schema_version": "tc-durable-prompt-snapshot.v3",
+  "snapshot_id": "TC-AGENT-LOOP-V2.6-CANDIDATE.3-SUPERSEDING-PROMPT-V1",
+  "snapshot_status": "PERSISTED_IMMUTABLE_SUPERSEDING_PUBLICATION",
+  "created_at_utc": "2026-08-23T05:56:22.2169460Z",
+  "created_by_task_id": "01a02a6f-2523-7ee2-a15f-80a6c42c4fde",
+  "record_policy": "APPEND_ONLY_DO_NOT_OVERWRITE",
+  "approval_turn_id": "01a02d30-2b46-75d2-8e0e-17fbb4b8662f",
+  "predecessor_snapshot": {
+    "file": "SNAPSHOT-MANIFEST.json",
+    "sha256": "f487bb36b01753d35388d9abb6e772f70e4defe8273008134ae60549b8ed340d"
+  },
+  "effective_prompt": {
+    "status": "APPROVED_SUPERSEDING_PROMPT",
+    "file": "core-prompt-v2.6-candidate.3.md",
+    "sha256": "ecba724a62bfa894763b2a48f1d195517f99e3fefb8de8be0748c73df7bd1990",
+    "activation": "NEW_OR_RESTARTED_IMPLEMENTATION_ORCHESTRATIONS"
+  },
+  "files": [
+    {
+      "role": "SUPERSEDING_CORE_PROMPT",
+      "file": "core-prompt-v2.6-candidate.3.md",
+      "sha256": "ecba724a62bfa894763b2a48f1d195517f99e3fefb8de8be0748c73df7bd1990"
+    },
+    {
+      "role": "CANDIDATE_MANIFEST",
+      "file": "prompt-revision-v2.6-v0.7-candidate.3-manifest.json",
+      "sha256": "3efaeae5f3e9f965a5465f5c09011be81bb5e91b811bdf2e2a64ee3d708ddf15"
+    },
+    {
+      "role": "STRUCTURAL_DIFF",
+      "file": "prompt-revision-v2.6-v0.7-candidate.3-structural-diff.md",
+      "sha256": "6de55b2b2c6d4435b7cfc32f779184e00b54dc328662754fcc29576239b2f0e9"
+    },
+    {
+      "role": "PUBLICATION_MANIFEST",
+      "file": "prompt-publication-manifest-v4.json",
+      "sha256": "bf7d7f4b39f3455558a68fb403feb8a8bb7e703d5f36e004a15d2213413470cd"
+    },
+    {
+      "role": "PUBLICATION_APPROVAL_RECEIPT",
+      "file": "prompt-publication-approval-receipt-v5.json",
+      "sha256": "6c177a7fbbb0a06db3586c92df701a8aeb8c7904344f0abf558bf712342e32d9"
+    },
+    {
+      "role": "UNCHANGED_INTEGRATED_ADAPTER",
+      "file": "experiment-adapter-v0.7-candidate.2.md",
+      "sha256": "f41ffec019c3ea5eb32655c22605075cee81239b2a24fff991034504d6077893"
+    },
+    {
+      "role": "UNCHANGED_R7_BUNDLE",
+      "file": "r7-latency-bounded-bundle-v1-published.json",
+      "sha256": "7ebd016a6fce0e841e2bf907bfe7451bf557fa46b8c0e32b384d04fcf4c880dc"
+    },
+    {
+      "role": "PREDECESSOR_SNAPSHOT",
+      "file": "SNAPSHOT-MANIFEST.json",
+      "sha256": "f487bb36b01753d35388d9abb6e772f70e4defe8273008134ae60549b8ed340d"
+    }
+  ],
+  "authority": {
+    "reviewer_findings_are_unadjudicated_proposals": true,
+    "adjudicator_exclusively_accepts_rejects_and_routes": true,
+    "sealed_adjudication_required_for_developer_dispatch": true,
+    "sole_product_writer_role": "Developer",
+    "human_final_confirmation_required_for_go": true
+  },
+  "in_flight_policy": {
+    "retroactive_candidate_mutation": false,
+    "unadjudicated_reviewer_findings_must_be_adjudicated": true,
+    "direct_reviewer_to_developer_dispatch_forbidden": true
+  },
+  "bundle_status": "R7_BUNDLE_UNCHANGED",
+  "launch_status": "NO_NEW_R7_LAUNCH_AUTHORITY"
+}

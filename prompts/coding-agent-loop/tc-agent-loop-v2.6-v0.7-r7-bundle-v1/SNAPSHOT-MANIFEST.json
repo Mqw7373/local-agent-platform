@@ -1,0 +1,81 @@
+{
+  "schema_version": "tc-durable-prompt-snapshot.v2",
+  "snapshot_id": "TC-AGENT-LOOP-V2.6-V0.7-R7-BUNDLE-V1",
+  "snapshot_status": "PERSISTED_IMMUTABLE_PUBLICATION",
+  "created_at_utc": "2026-08-20T05:14:59.1141895Z",
+  "created_by_task_id": "01a0188d-43b4-7660-9ca5-703fe006079a",
+  "record_policy": "APPEND_ONLY_DO_NOT_OVERWRITE",
+  "approval_turn_id": "01a01d97-9cdb-7f20-bb3b-f162004fc804",
+  "predecessor_snapshot": {
+    "directory": "../tc-agent-loop-v2.5.1-v0.6.1-bundle-v2",
+    "manifest_sha256": "aafdbdac66fba8e21dc4c00f39c26eb737e68cb0c9ec7b0e78789ca5fa237bf7"
+  },
+  "files": [
+    {
+      "role": "CORE_PROMPT",
+      "file": "core-prompt-v2.6-candidate.2.md",
+      "sha256": "39d4b97ff1732c1fb21da6f3a77dbe43138b2402edb827fec3f04734676e404d"
+    },
+    {
+      "role": "INTEGRATED_ADAPTER",
+      "file": "experiment-adapter-v0.7-candidate.2.md",
+      "sha256": "f41ffec019c3ea5eb32655c22605075cee81239b2a24fff991034504d6077893"
+    },
+    {
+      "role": "BUNDLE_SCHEMA",
+      "file": "compact-frozen-bundle.schema.v2.json",
+      "sha256": "aa79ed8c28e66c4cd1dd78b01a7f789d531ac04ed18755da09f957ebdffa743e"
+    },
+    {
+      "role": "R7_BUNDLE_CANDIDATE",
+      "file": "r7-latency-bounded-bundle-v1-candidate.2.json",
+      "sha256": "227515f7e79671617e82cfe3806a39d4e3fa93cfea68a4be3132e72601c7a32f"
+    },
+    {
+      "role": "R7_BUNDLE_PUBLISHED",
+      "file": "r7-latency-bounded-bundle-v1-published.json",
+      "sha256": "7ebd016a6fce0e841e2bf907bfe7451bf557fa46b8c0e32b384d04fcf4c880dc"
+    },
+    {
+      "role": "CANDIDATE_MANIFEST",
+      "file": "prompt-revision-v2.6-v0.7-candidate.2-manifest.json",
+      "sha256": "0e904d0ea3a87b7fec4ef018f0fa0e02708066058fb17b2f2e1f0363d44cb773"
+    },
+    {
+      "role": "STRUCTURAL_DIFF",
+      "file": "prompt-revision-v2.6-v0.7-candidate.2-structural-diff.md",
+      "sha256": "3b6e96732cc7fb898a82249895ee999de58663aa87bb1f83337b3a6f2ad79903"
+    },
+    {
+      "role": "FINDING_LEDGER_PREPUBLICATION",
+      "file": "prompt-finding-escape-ledger-v13.json",
+      "sha256": "1a2f3c593ca898127691ca45e8db94cbfac2d373d95215cb4d7740e81158e244"
+    },
+    {
+      "role": "FINDING_LEDGER_PUBLICATION",
+      "file": "prompt-finding-escape-ledger-v14.json",
+      "sha256": "ed79ea0db2377d5c4ee76f0b31aeede74fd899396641651e7922c9f1751ce18e"
+    },
+    {
+      "role": "PUBLICATION_MANIFEST",
+      "file": "prompt-publication-manifest-v3.json",
+      "sha256": "4cd5ab9b6929cd283298dcfc5a3addabaf9846d3b19ae2e6a11c9cbc1e1cdf27"
+    },
+    {
+      "role": "PUBLICATION_APPROVAL_RECEIPT",
+      "file": "prompt-publication-approval-receipt-v4.json",
+      "sha256": "8b3e20ef70bb152d60b47254b3d63f9dc09123d7315a7a04c53dc498faf5eada"
+    },
+    {
+      "role": "README",
+      "file": "README.md",
+      "sha256": "50992d0c18ef58820679cf2f0b8b64803526fe2ca60b57acb90ab45017c19f6f"
+    }
+  ],
+  "authority": {
+    "sole_product_writer_role": "Developer",
+    "other_develop_loop_roles_product_read_only": true,
+    "human_final_confirmation_required_for_go": true
+  },
+  "launch_status": "R7_NOT_LAUNCHED"
+}

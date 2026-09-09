@@ -1,0 +1,18 @@
+{
+  "name": "@dietrichgebert/ponytail",
+  "version": "4.9.0",
+  "source_repository": "https://github.com/DietrichGebert/ponytail",
+  "source_commit": "0a4dd63ad4541f4f655c4108a295916f3c1d8fda",
+  "source_path": "skills/ponytail/SKILL.md",
+  "source_url": "https://github.com/DietrichGebert/ponytail/blob/0a4dd63ad4541f4f655c4108a295916f3c1d8fda/skills/ponytail/SKILL.md",
+  "sha256": "1316a2f3f95741d2300b116fe0c2d81ce4a9568656ed0a62643f54aaf09957f2",
+  "license": "MIT",
+  "integration": {
+    "role": "developer",
+    "mode": "lite",
+    "rollout": "ab-test-only",
+    "subagent_start_hook": false,
+    "upstream_hooks_executed": false,
+    "authority_precedence": "frozen-bundle-core-prompt-and-verification-first"
+  }
+}

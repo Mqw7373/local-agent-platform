@@ -1,0 +1,29 @@
+{
+  "schema_version": "1",
+  "revision": "TC-SESSION-PROMPT-v2.8",
+  "predecessor_revision": "TC-SESSION-PROMPT-v2.7",
+  "predecessor_sha256": "e736c5a656a4d2b3b654a468d9fa7165ecb92042ebd9a2043f7e077fe416b117",
+  "findings": [
+    {
+      "prompt_finding_id": "PROMPT-R9-001",
+      "classification": "PROMPT_DEFECT",
+      "evidence": "Core Prompt v2.7 required role and memory isolation but did not bind provider/model identity. The shared adapter consequently allowed all roles, including Challenger, to inherit one optional global Codex model.",
+      "affected_clauses": [
+        "v2.7 section 3 Canonical workflow",
+        "v2.7 section 6 Fresh Clean-room Challenger"
+      ],
+      "minimal_revision": "Bind each model-bearing role to its approved provider/model, require new ephemeral executions, forbid Challenger fallback to Codex, and fail closed as PLATFORM_LIMITATION when an exact binding is unavailable.",
+      "impact_on_active_round": "NO_EFFECT_ON_ACTIVE_ROUND",
+      "compatibility": "Existing v2.7/v0.8 runs retain their frozen prompt authority. New runs use v2.8/v0.9.",
+      "regression_scenarios": [
+        "Developer launches gpt-6-astra in an ephemeral Codex execution.",
+        "Reviewer launches gpt-5.6-sol without Developer conversation state.",
+        "Challenger launches deepseek/deepseek-v4-flash through a read-only external adapter and cannot fall back to Codex.",
+        "Adjudicator launches gpt-6-astra without Developer conversation state.",
+        "Missing Challenger credentials stop as PLATFORM_LIMITATION before human confirmation.",
+        "Mastra and LangGraph resolve identical role execution bindings."
+      ],
+      "status": "APPROVED_FOR_PUBLICATION"
+    }
+  ]
+}

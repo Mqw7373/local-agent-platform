@@ -1,0 +1,21 @@
+{
+  "name": "local-agent-platform",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Shared local coding-agent platform with Mastra and LangGraph orchestrators.",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Mqw7373/local-agent-platform.git"
+  },
+  "scripts": {
+    "bootstrap": "npm install --prefix apps/unified-hub && npm install --prefix services/mastra-coding-platform && npm install --prefix services/multica-mastra-bridge && powershell -NoProfile -ExecutionPolicy Bypass -File scripts/bootstrap-langgraph.ps1",
+    "check": "npm run lint --prefix apps/unified-hub && npm run build --prefix apps/unified-hub && npm run typecheck --prefix services/mastra-coding-platform && npm run self-test --prefix services/mastra-coding-platform && npm run profile-isolation-test --prefix services/mastra-coding-platform && npm run codex-adapter-test --prefix services/mastra-coding-platform && npm run writer-lock-test --prefix services/mastra-coding-platform && npm run runtime-recovery-test --prefix services/mastra-coding-platform && powershell -NoProfile -ExecutionPolicy Bypass -File scripts/test-langgraph.ps1 && npm test --prefix services/multica-mastra-bridge",
+    "start:local": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/start-platform.ps1",
+    "stop:local": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/stop-platform.ps1",
+    "status": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/status-platform.ps1"
+  },
+  "engines": {
+    "node": ">=22.13.0"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "1",
+  "revision": "TC-SESSION-PROMPT-v2.7",
+  "predecessor_revision": "TC-SESSION-PROMPT-v2.6-candidate.3",
+  "predecessor_sha256": "ecba724a62bfa894763b2a48f1d195517f99e3fefb8de8be0748c73df7bd1990",
+  "findings": [
+    {
+      "prompt_finding_id": "PROMPT-R8-001",
+      "classification": "PROMPT_DEFECT",
+      "evidence": "After each remediation the candidate already receives independent Reviewer and Challenger review before Adjudication; a second Final Challenger and second Final Adjudication inspect unchanged bytes and add latency without a distinct authority boundary.",
+      "affected_clauses": [
+        "v2.6 section 6.2 Final Fresh Challenger",
+        "v2.6 reference algorithm final challenge loop"
+      ],
+      "minimal_revision": "Use one fresh clean-room Challenger in every review cycle and route an Adjudicator decision with no accepted P0/P1 directly to Human Final Confirmation.",
+      "impact_on_active_round": "NO_EFFECT_ON_ACTIVE_ROUND",
+      "compatibility": "Completed and already-started v2.6/v0.7 runs retain their frozen authority. New runs use v2.7/v0.8.",
+      "regression_scenarios": [
+        "Initial candidate with no accepted P0/P1 uses one Challenger and one Adjudicator before human confirmation.",
+        "Every Developer remediation runs verification, Reviewer, a new clean-room Challenger, and Adjudicator.",
+        "Document P0/P1 stops for Document Owner and human approval.",
+        "Accepted P2 remains visible after later empty decisions.",
+        "Only Developer can mutate product bytes.",
+        "Human confirmation binds the exact candidate snapshot SHA."
+      ],
+      "status": "APPROVED_FOR_PUBLICATION"
+    }
+  ]
+}

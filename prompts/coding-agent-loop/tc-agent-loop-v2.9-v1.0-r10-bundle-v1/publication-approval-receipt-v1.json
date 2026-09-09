@@ -1,0 +1,13 @@
+{
+  "schema_version": "1",
+  "receipt_id": "PROMPT-PUBLICATION-R10-001",
+  "revision": "TC-SESSION-PROMPT-v2.9",
+  "adapter_revision": "v1.0",
+  "bundle_revision": "R10-bundle-v1",
+  "approved_by": "user",
+  "approved_at": "2026-09-08",
+  "approval_evidence": "User approved the proposed architecture and instructed: 好，就按这个架构改。",
+  "approved_scope": "Fresh Reviewer directly routes clear outcomes; DeepSeek Challenger and Astra Adjudicator run only on high-risk, insufficient-evidence, or conflicting escalation; Developer remains sole product writer; Human remains sole GO authority.",
+  "active_predecessor_immutable": true,
+  "publication_status": "APPROVED_FOR_PUBLICATION"
+}

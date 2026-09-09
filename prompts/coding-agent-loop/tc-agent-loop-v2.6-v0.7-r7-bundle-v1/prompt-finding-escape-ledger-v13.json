@@ -1,0 +1,33 @@
+{
+  "schema_version": "tc-prompt-finding-escape-ledger.segment.v13",
+  "ledger_id": "TC-PROMPT-FINDING-ESCAPE-LEDGER",
+  "owner_task_id": "01a0188d-43b4-7660-9ca5-703fe006079a",
+  "record_policy": "APPEND_ONLY",
+  "previous_ledger": {
+    "file": "prompt-finding-escape-ledger-v12.json",
+    "file_sha256": "84ad101c6eaaa720d612a24281d6fbd751dd8436a1d32aa77f1c699ef7f91f03"
+  },
+  "findings": [
+    {
+      "prompt_finding_id": "PF-R7-002-DEVELOPER-ONLY-PRODUCT-WRITE-AUTHORITY",
+      "classification": "PROMPT_AMBIGUITY",
+      "defect_location": "Core v2.6 candidate.1 sections 2 and 6.2; Adapter v0.7 candidate.1 sections 8 and 9",
+      "trigger_task_id": "01a0188d-43b4-7660-9ca5-703fe006079a",
+      "trigger_turn_id": "01a01d67-af64-7471-8e21-71dddc4a2147",
+      "monitored_task_id": "01a01b07-9b1f-7ea1-98e5-7421d55eb622",
+      "monitored_cursor": "aeaa4c20-1dcf-4420-be1a-d45ddb0ac7ba:147",
+      "exact_evidence": {
+        "user_requirement": "只有Developer是能改代码的角色，其他的Reviewer, Adjudicator, challenger，以及其他的在develop loop里面的角色都只能只读。",
+        "ambiguous_predecessor_text": "沿用同一 Developer、Reviewer A、Final Fresh Challenger 和 Adjudicator完成修复与 closure",
+        "risk": "The predecessor could be misread as authorizing Challenger participation in remediation or leaving unnamed Develop Loop roles without an explicit product-read-only restriction."
+      },
+      "root_cause": "Write authority was expressed in per-role bullets instead of one exhaustive invariant covering every Develop Loop identity and indirect tool delegation.",
+      "minimal_revision": "Declare Developer as the sole product-write identity; make all other Develop Loop roles product-read-only; route accepted Challenger code findings through Adjudicator to Developer; treat any indirect non-Developer product mutation as a workflow violation.",
+      "core_candidate": "core-prompt-v2.6-candidate.2.md",
+      "adapter_candidate": "experiment-adapter-v0.7-candidate.2.md",
+      "bundle_candidate": "r7-latency-bounded-bundle-v1-candidate.2.json",
+      "active_round_effect": "NO_EFFECT_ON_ACTIVE_ROUND",
+      "publication_status": "CANDIDATE_AWAITING_HUMAN_APPROVAL"
+    }
+  ]
+}
